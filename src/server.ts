@@ -32,14 +32,14 @@ const images: string[]=[];
   /**************************************************************************** */
 
   //! END @TODO1
-  app.get("/filteredimage",async(req,res)=>{
-    const  {image_url} = req.query;
+  app.get("/filteredimage",async(req:express.Request, res:express.Response)=>{
+    const  {image_url}:{image_url: string} = req.query;
     if (!image_url) {
       return res.status(400).send("img url is required");
       
     }
     const img_file=await filterImageFromURL(image_url)
-    //  res.status(200).send(image_url);
+    // res.status(200).send(image_url);
     // images.push(img_file);
      res.sendFile(img_file,()=>{
       deleteLocalFiles([img_file])
@@ -50,7 +50,7 @@ const images: string[]=[];
 
   // Root Endpoint
   // Displays a simple message to the user
-  app.get( "/", async ( req, res ) => {
+  app.get( "/", async ( req:express.Request, res:express.Response ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );
 
